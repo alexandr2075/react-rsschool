@@ -6,7 +6,9 @@ class Layout extends Component {
   render() {
     return (
       <>
-        <aside>
+        <aside
+          style={{ paddingTop: 20, marginRight: '10px', background: '#b6f542', height: '100vh' }}
+        >
           <SearchBar />
           <nav>
             <ul>
@@ -19,7 +21,7 @@ class Layout extends Component {
             </ul>
           </nav>
         </aside>
-        <div className="outlet" style={{ padding: 20 }}>
+        <div className="outlet" style={{ width: '100%', overflowY: 'scroll' }}>
           <Outlet />
         </div>
       </>
