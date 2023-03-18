@@ -12,7 +12,7 @@ export class Card extends Component<CardPropsType> {
   }
   render() {
     return (
-      <div className={'card'}>
+      <div className={'card'} data-testid="card">
         <div className="card-img">
           <img src={this.props.url} alt="meme" className={'card-img_img'} />
         </div>

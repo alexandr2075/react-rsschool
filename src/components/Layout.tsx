@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import SearchBar from './searchBar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 
 class Layout extends Component {
   render() {
