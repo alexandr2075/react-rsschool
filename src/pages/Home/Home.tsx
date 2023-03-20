@@ -8,7 +8,7 @@ type HomeStateType = {
   isLoading: boolean;
 };
 
-type HomePropsType = {};
+type HomePropsType = object;
 
 type MemeType = {
   box_count: number;

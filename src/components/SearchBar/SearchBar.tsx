@@ -5,7 +5,7 @@ type StateType = {
   value: string;
 };
 
-type PropsType = {};
+type PropsType = object;
 
 class SearchBar extends Component<PropsType, StateType> {
   constructor(props: StateType) {
@@ -41,7 +41,13 @@ class SearchBar extends Component<PropsType, StateType> {
     console.log(this.state.value);
     return (
       <div className="search-block">
-        <input type="text" className="search" value={this.state.value} onChange={this.onChange} />
+        <input
+          type="text"
+          className="search"
+          value={this.state.value}
+          onChange={this.onChange}
+          autoFocus={true}
+        />
         <button className="search-btn" onClick={() => this.onSearch()}>
           search
         </button>
