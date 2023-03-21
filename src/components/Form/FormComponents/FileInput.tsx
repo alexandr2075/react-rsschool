@@ -1,31 +1,13 @@
-import React, { Component, FormEvent } from 'react';
+import React, { Component, RefObject } from 'react';
 
-type StateFileInputType = {
-  source: string;
+type PropsFileInputType = {
+  refFile: RefObject<HTMLInputElement>;
+  errorFile: string;
 };
 
-type PropsFileInputType = object;
-
-class FileInput extends Component<PropsFileInputType, StateFileInputType> {
-  private fileInput: React.RefObject<HTMLInputElement>;
+class FileInput extends Component<PropsFileInputType> {
   constructor(props: PropsFileInputType) {
     super(props);
-    this.state = {
-      source: '',
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.fileInput = React.createRef();
-  }
-  handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!this.fileInput.current?.files[0].name) {
-      return;
-    }
-    const path = this.fileInput.current?.files[0];
-    console.log(path);
-    console.log(URL.createObjectURL(path));
-    this.setState({ source: URL.createObjectURL(path) });
-    // alert(`Selected file - ${this.fileInput.current}`);
   }
 
   render() {
@@ -33,7 +15,8 @@ class FileInput extends Component<PropsFileInputType, StateFileInputType> {
       <>
         <label htmlFor="avatar">Choose a profile picture:</label>
 
-        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+        <input type="file" id="avatar" name="avatar" ref={this.props.refFile} />
+        <p className="error-style">{this.props.errorFile}</p>
       </>
     );
   }

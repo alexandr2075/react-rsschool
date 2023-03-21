@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 
-class Switcher extends Component {
+type PropsSwitcherInputType = {
+  refSwitcher: RefObject<HTMLInputElement>;
+  errorGender: string;
+};
+
+class Switcher extends Component<PropsSwitcherInputType> {
   render() {
     return (
       <fieldset>
         <legend>Gender:</legend>
 
         <div>
-          <input type="radio" id="man" name="gender" value="man" defaultChecked />
+          <input
+            type="radio"
+            id="man"
+            name="gender"
+            value="man"
+            ref={this.props.refSwitcher}
+            defaultChecked
+          />
           <label htmlFor="man">Man</label>
         </div>
 
         <div>
           <input type="radio" id="woman" name="gender" value="woman" />
           <label htmlFor="woman">Woman</label>
-        </div>
-
-        <div>
-          <input type="radio" id="it" name="gender" value="it" />
-          <label htmlFor="it">It</label>
         </div>
       </fieldset>
     );

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 
-class Checkbox extends Component {
+type PropsCheckboxInputType = {
+  refCheckbox: RefObject<HTMLInputElement>;
+  errorCheckbox: string;
+};
+
+class Checkbox extends Component<PropsCheckboxInputType> {
   render() {
     return (
-      <fieldset>
-        <legend>Consent to personal data processing:</legend>
-
-        <div>
-          <input type="checkbox" id="scales" name="scales" defaultChecked />
-          <label htmlFor="scales">I consent to the processing of my personal data</label>
-        </div>
-
-        <div>
-          <input type="checkbox" id="horns" name="horns" />
-          <label htmlFor="horns">I do not consent to the processing of my personal data</label>
-        </div>
-      </fieldset>
+      <>
+        Consent to personal data processing:
+        <label htmlFor="scales">
+          <input type="checkbox" id="scales" name="scales" ref={this.props.refCheckbox} />I consent
+          to the processing of my personal data
+        </label>
+        <p className="error-style">{this.props.errorCheckbox}</p>
+      </>
     );
   }
 }

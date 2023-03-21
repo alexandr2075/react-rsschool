@@ -1,9 +1,17 @@
 .form {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding: 20px;
+    width: 30%;
+    background-color: darkseagreen;
 }
 
 .form label {
     padding: 10px 0;
+}
+
+.error-style {
+    height: 15px;
+    color: crimson;
+    margin: 5px 0 20px;
 }

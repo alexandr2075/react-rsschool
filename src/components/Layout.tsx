@@ -24,7 +24,7 @@ class Layout extends Component {
             </ul>
           </nav>
         </aside>
-        <div className="outlet" style={{ width: '100%', overflowY: 'scroll' }}>
+        <div className="outlet" style={{ width: '100%' }}>
           <Outlet />
         </div>
       </>

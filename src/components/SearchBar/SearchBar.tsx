@@ -32,13 +32,11 @@ class SearchBar extends Component<PropsType, StateType> {
 
   onSearch() {
     if (this.state.value) {
-      console.log(this.state.value);
       localStorage.setItem('input', this.state.value);
     }
     this.setState({ value: '' });
   }
   render() {
-    console.log(this.state.value);
     return (
       <div className="search-block">
         <input

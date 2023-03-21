@@ -2,22 +2,16 @@ import React, { Component, RefObject } from 'react';
 
 type PropsDateInputType = {
   refDate: RefObject<HTMLInputElement>;
+  errorDate: string;
 };
 class FormDate extends Component<PropsDateInputType> {
   render() {
     return (
       <>
-        <label htmlFor="start">Today date:</label>
+        <label htmlFor="start">Date of birth:</label>
 
-        <input
-          type="date"
-          id="start"
-          name="trip-start"
-          defaultValue="2018-07-22"
-          min="2018-01-01"
-          max="2018-12-31"
-          ref={this.props.refDate}
-        />
+        <input type="date" id="start" name="trip-start" ref={this.props.refDate} />
+        <p className="error-style">{this.props.errorDate}</p>
       </>
     );
   }
