@@ -6,6 +6,7 @@ import FormDate from './FormComponents/FormDate';
 import FormText from './FormComponents/FormText';
 import Select from './FormComponents/Select';
 import FileInput from './FormComponents/FileInput';
+import FormCard, { PropsFormCardType } from './FormComponents/FormCard/FormCard';
 
 type StateFormType = {
   errorName: string;
@@ -14,12 +15,15 @@ type StateFormType = {
   errorGender: string;
   errorSelect: string;
   errorFile: string;
+  isMessageDoneVisible: boolean;
+  isFormCardVisible: boolean;
+  cards: Array<PropsFormCardType>;
 };
 
 type PropsFormType = object;
 
 class Form extends Component<PropsFormType, StateFormType> {
-  private inputText: RefObject<HTMLInputElement> = React.createRef();
+  inputText: RefObject<HTMLInputElement> = React.createRef();
   private inputDate: RefObject<HTMLInputElement> = React.createRef();
   private inputCheckbox: RefObject<HTMLInputElement> = React.createRef();
   private inputSwitcher: RefObject<HTMLInputElement> = React.createRef();
@@ -34,6 +38,9 @@ class Form extends Component<PropsFormType, StateFormType> {
       errorGender: '',
       errorSelect: '',
       errorFile: '',
+      isMessageDoneVisible: false,
+      isFormCardVisible: false,
+      cards: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -45,17 +52,44 @@ class Form extends Component<PropsFormType, StateFormType> {
     this.validationCheckbox();
     this.validationCheckbox();
     this.validationFile();
+
+    if (this.inputFile.current) {
+      this.setState({
+        isFormCardVisible: true,
+        isMessageDoneVisible: true,
+        cards: [
+          ...this.state.cards,
+          {
+            src: URL.createObjectURL(this.inputFile.current!.files![0]),
+            name: this.inputText.current!.value,
+            birth: this.inputDate.current!.value,
+            gender: this.inputSwitcher.current!.checked ? 'Man' : 'Woman',
+            country: this.inputSelect.current!.value,
+          },
+        ],
+      });
+
+      this.inputText.current!.value = '';
+      this.inputDate.current!.value = '';
+      this.inputCheckbox.current!.checked = true;
+      this.inputSwitcher.current!.checked = true;
+      this.inputSelect.current!.value = '';
+      this.inputFile.current!.value = '';
+
+      setTimeout(() => {
+        this.setState({ isMessageDoneVisible: false });
+      }, 2000);
+    }
   }
 
   validationName() {
     const len = this.inputText.current!.value.length;
-    if (len && len >= 4 && len < 9) {
+    if (len && len >= 4 && len < 16) {
       this.setState({ errorName: '' });
     } else {
       this.setState({ errorName: 'Please lengthen this text to 4 characters or more' });
     }
   }
-
   validationDate() {
     if (this.inputDate.current!.value) {
       this.setState({ errorDate: '' });
@@ -63,7 +97,6 @@ class Form extends Component<PropsFormType, StateFormType> {
       this.setState({ errorDate: 'Please enter date of birth' });
     }
   }
-
   validationCheckbox() {
     if (this.inputCheckbox.current!.checked) {
       this.setState({ errorCheckbox: '' });
@@ -72,7 +105,6 @@ class Form extends Component<PropsFormType, StateFormType> {
     }
   }
   validationFile() {
-    console.log(this.inputFile);
     if (this.inputFile.current!.value) {
       this.setState({ errorFile: '' });
     } else {
@@ -81,8 +113,9 @@ class Form extends Component<PropsFormType, StateFormType> {
   }
 
   render() {
+    console.log(this.state);
     return (
-      <>
+      <div className={'form-wrapper'}>
         <form onSubmit={this.handleSubmit} className="form">
           <h1>Form</h1>
 
@@ -94,17 +127,27 @@ class Form extends Component<PropsFormType, StateFormType> {
           <FileInput errorFile={this.state.errorFile} refFile={this.inputFile} />
 
           <input type="submit" value="Submit" style={{ padding: 5 }} />
+          {this.state.isMessageDoneVisible && <p className="message-done">Data has been saved</p>}
         </form>
-      </>
+        {this.state.isFormCardVisible && (
+          <div className="form-cards">
+            {this.state.cards.map((card, index) => {
+              return (
+                <FormCard
+                  key={index}
+                  src={card.src}
+                  name={card.name}
+                  birth={card.birth}
+                  gender={card.gender}
+                  country={card.country}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
     );
   }
 }
 
 export default Form;
-// if (!this.fileInput.current?.files[0].name) {
-//   return;
-// }
-// const path = this.fileInput.current?.files[0];
-// console.log(path);
-// console.log(URL.createObjectURL(path));
-// this.setState({ source: URL.createObjectURL(path) });

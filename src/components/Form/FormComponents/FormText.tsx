@@ -8,7 +8,7 @@ class FormText extends Component<PropsTextInputType> {
   render() {
     return (
       <>
-        <label htmlFor="name">Name (4 to 8 characters):</label>
+        <label htmlFor="name">Name (4 to 15 characters):</label>
 
         <input type="text" id="name" name="name" ref={this.props.refText} required size={10} />
         <p className="error-style">{this.props.errorName}</p>

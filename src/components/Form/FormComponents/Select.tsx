@@ -10,14 +10,16 @@ class Select extends Component<PropsSelectInputType> {
       <label>
         I live in a country:
         <select ref={this.props.refSelect}>
-          <option value="belarus">Belarus</option>
-          <option value="ukraine">Ukraine</option>
-          <option value="ukraine">Kazakhstan</option>
-          <option value="russia">Russia</option>
-          <option value="armenia">Armenia</option>
-          <option value="georgia">Georgia</option>
-          <option value="uzbekistan">Uzbekistan</option>
-          <option value="kyrgyzstan">Kyrgyzstan</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="Kazakhstan" defaultChecked>
+            Kazakhstan
+          </option>
+          <option value="Russia">Russia</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Kyrgyzstan">Kyrgyzstan</option>
         </select>
       </label>
     );

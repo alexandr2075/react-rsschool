@@ -1,3 +1,6 @@
+.form-wrapper {
+    display: flex;
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -14,4 +17,11 @@
     height: 15px;
     color: crimson;
     margin: 5px 0 20px;
+}
+
+.message-done {
+    height: 15px;
+    color: darkgreen;
+    text-align: center;
+    margin: 10px 0 0;
 }
