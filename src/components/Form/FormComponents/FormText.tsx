@@ -10,7 +10,7 @@ class FormText extends Component<PropsTextInputType> {
       <>
         <label htmlFor="name">Name (4 to 15 characters):</label>
 
-        <input type="text" id="name" name="name" ref={this.props.refText} required size={10} />
+        <input type="text" id="name" name="name" ref={this.props.refText} size={10} />
         <p className="error-style">{this.props.errorName}</p>
       </>
     );

@@ -1,5 +1,7 @@
 .App {
   display: flex;
   padding: 0 25px;
+  min-height: 100vh;
+  min-width: calc(100% - 50px);
 }
 

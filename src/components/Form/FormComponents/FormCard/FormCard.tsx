@@ -13,7 +13,7 @@ export type PropsFormCardType = {
 class FormCard extends Component<PropsFormCardType> {
   render() {
     return (
-      <div className="form-card">
+      <div className="form-card" data-testid="form-card">
         <div className="form-card_img">
           <img src={this.props.src} alt="profile" />
         </div>

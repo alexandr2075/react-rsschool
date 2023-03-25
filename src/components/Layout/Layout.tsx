@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import SearchBar from './SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 class Layout extends Component {
   render() {
     return (
       <>
-        <aside
-          style={{ paddingTop: 20, marginRight: '10px', background: '#b6f542', height: '100vh' }}
-        >
+        <aside style={{ paddingTop: 20, marginRight: '10px', background: '#b6f542' }}>
           <SearchBar />
           <nav>
             <ul>

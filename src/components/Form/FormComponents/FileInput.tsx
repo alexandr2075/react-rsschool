@@ -15,7 +15,13 @@ class FileInput extends Component<PropsFileInputType> {
       <>
         <label htmlFor="avatar">Choose a profile picture:</label>
 
-        <input type="file" id="avatar" name="avatar" ref={this.props.refFile} />
+        <input
+          type="file"
+          id="avatar"
+          data-testid="avatar"
+          name="avatar"
+          ref={this.props.refFile}
+        />
         <p className="error-style">{this.props.errorFile}</p>
       </>
     );

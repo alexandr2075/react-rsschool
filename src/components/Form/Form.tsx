@@ -53,7 +53,14 @@ class Form extends Component<PropsFormType, StateFormType> {
     this.validationCheckbox();
     this.validationFile();
 
-    if (this.inputFile.current) {
+    if (
+      this.inputFile.current &&
+      this.inputText.current &&
+      this.inputDate.current &&
+      this.inputCheckbox.current &&
+      this.inputSwitcher.current &&
+      this.inputSelect.current
+    ) {
       this.setState({
         isFormCardVisible: true,
         isMessageDoneVisible: true,
@@ -71,9 +78,9 @@ class Form extends Component<PropsFormType, StateFormType> {
 
       this.inputText.current!.value = '';
       this.inputDate.current!.value = '';
-      this.inputCheckbox.current!.checked = true;
+      this.inputCheckbox.current!.checked = false;
       this.inputSwitcher.current!.checked = true;
-      this.inputSelect.current!.value = '';
+      this.inputSelect.current!.value = 'Kazakhstan';
       this.inputFile.current!.value = '';
 
       setTimeout(() => {
@@ -113,7 +120,6 @@ class Form extends Component<PropsFormType, StateFormType> {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className={'form-wrapper'}>
         <form onSubmit={this.handleSubmit} className="form">
