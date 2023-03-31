@@ -26,12 +26,9 @@ export default class AboutUs extends React.Component<PropsAboutType, StateAboutT
     if (this.myRef.current) {
       this.setState({ name: this.myRef.current.value });
     }
-    console.log('onSubmit');
-    console.log(this.state);
   }
 
   render() {
-    console.log('render: ', this.state);
     return (
       <div>
         <Header title={'About Us'} />

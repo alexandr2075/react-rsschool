@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('Card', () => {
   beforeEach(() => {
-    render(<Card key={'1'} url={'http'} name={'meme'} />);
+    render(<Card key={'1'} url={'http'} description={'meme'} />);
   });
 
   test('should show the card component', () => {

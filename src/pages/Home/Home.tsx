@@ -1,58 +1,44 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
-import { Card, CardPropsType } from '../../components/Card/Card';
+import { Card, UrlsType } from '../../components/Card/Card';
 import './Home.css';
+import { ACCESS_KEY } from '../../../constants';
 
-type HomeStateType = {
-  cards: Array<CardPropsType>;
-  isLoading: boolean;
+type DataType = {
+  id?: string;
+  alt_description: string;
+  created_at?: string;
+  likes?: number;
+  urls: UrlsType;
 };
 
-type HomePropsType = object;
+export const Home = () => {
+  const [cards, setCards] = useState<DataType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-type MemeType = {
-  box_count: number;
-  captions: number;
-  height: number;
-  id: string;
-  name: string;
-  url: string;
-  width: number;
-};
+  useEffect(() => {
+    fetch(`https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCards(data);
+      });
+    setIsLoading(false);
+  }, [cards]);
 
-class Home extends Component<HomePropsType, HomeStateType> {
-  constructor(props: HomeStateType) {
-    super(props);
-    this.state = {
-      cards: [],
-      isLoading: false,
-    };
-  }
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    const response = await fetch('https://api.imgflip.com/get_memes');
-    const { data } = await response.json();
-    const dataCards: Array<CardPropsType> = data.memes.map((item: MemeType) => ({
-      name: item.name,
-      url: item.url,
-    }));
-    this.setState({ cards: dataCards });
-    this.setState({ isLoading: false });
-  }
-  render() {
-    return (
-      <div>
-        <Header title={'Home'} />
-        <div className="cards">
-          {this.state.isLoading
-            ? '...Loading'
-            : this.state.cards.map((card) => {
-                return <Card key={card.name} name={card.name} url={card.url} />;
-              })}
-        </div>
+  return (
+    <div>
+      <Header title={'Home'} />
+      <div className="cards">
+        {isLoading
+          ? '...Loading'
+          : cards.map((card) => {
+              return (
+                <Card key={card.id} description={card.alt_description} url={card.urls.small} />
+              );
+            })}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Home;

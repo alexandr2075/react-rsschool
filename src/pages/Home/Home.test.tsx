@@ -8,4 +8,12 @@ describe('Home', () => {
     render(<Home />);
     await expect(screen.getByText(/home/i)).toBeInTheDocument();
   });
+
+  it('renders a list of cards', async () => {
+    render(<Home />);
+    const cards = await screen.findAllByTestId('card');
+    expect(cards).toHaveLength(10);
+    const image = await screen.findAllByAltText('meme');
+    expect(image).toHaveLength(10);
+  });
 });

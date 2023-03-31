@@ -5,7 +5,7 @@ import ErrorPage from './pages/404';
 import Layout from './components/Layout/Layout';
 import AboutUs from './pages/AboutUs';
 import Home from './pages/Home/Home';
-import Form from './components/Form/Form';
+import FormHook from './components/Form/FormHook';
 
 class App extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class App extends React.Component {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<AboutUs />} />
-            <Route path="form" element={<Form />} />
+            <Route path="form" element={<FormHook />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
