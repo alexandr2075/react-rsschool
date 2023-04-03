@@ -4,20 +4,28 @@
 }
 
 .search {
-    display: inline-block;
-    height: 80%;
+    display: flex;
+    height: 100%;
     margin-right: 8px;
-    border-radius: 5px;
+    border-radius: 15px;
+    padding: 0 0 0 10px;
+    border: transparent;
 }
 
 .search-btn {
-    display: inline-block;
+    display: flex;
+    flex: 1 0 20px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50px;
     height: 100%;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3px;
+    border: transparent;
+    background-color: #447B21FF;
+    border-radius: 35px;
+    /*padding: 13px;*/
 }
 
 .search-btn:hover {
-    background: gray;
+    background: #56942DFF;
 }
+

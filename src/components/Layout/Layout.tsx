@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import SearchBarHook from '../SearchBar/SearchBarHook';
+import { ACCESS_KEY } from '../../../constants';
+import { UrlsType } from '../Card/Card';
 
+export type DataType = {
+  id?: string;
+  alt_description: string;
+  created_at?: string;
+  likes?: number;
+  urls: UrlsType;
+};
 function Layout() {
+  const [cards, setCards] = useState<DataType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCards(data);
+      });
+    setIsLoading(false);
+  }, []);
+
   return (
     <>
       <aside style={{ paddingTop: 20, marginRight: '10px', background: '#b6f542' }}>
-        <SearchBarHook />
+        <SearchBarHook setCards={setCards} />
         <nav>
           <ul>
             <li>
@@ -22,7 +43,7 @@ function Layout() {
         </nav>
       </aside>
       <div className="outlet" style={{ width: '100%' }}>
-        <Outlet />
+        <Outlet context={{ cards: cards, isLoading: isLoading }} />
       </div>
     </>
   );
