@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { MouseEventHandler } from 'react';
 import './Card.css';
 
 export type UrlsType = {
@@ -12,24 +12,20 @@ export type UrlsType = {
 
 export type CardPropsType = {
   id?: string;
-  // key?: string;
   description: string;
   created_at?: string;
   likes?: number;
   url: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
-export class Card extends Component<CardPropsType> {
-  constructor(props: CardPropsType) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className={'card'} data-testid="card">
-        <div className="card-img">
-          <img src={this.props.url} alt="meme" className={'card-img_img'} />
-        </div>
-        <p className="card-name">{this.props.description}</p>
+
+export function Card(props: CardPropsType) {
+  return (
+    <div id={props.id} className={'card'} data-testid="card" onClick={props.onClick}>
+      <div className="card-img">
+        <img src={props.url} alt="meme" className={'card-img_img'} />
       </div>
-    );
-  }
+      <p className="card-name">{props.description}</p>
+    </div>
+  );
 }

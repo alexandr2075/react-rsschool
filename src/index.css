@@ -2,7 +2,11 @@ body {
     margin: 0;
 }
 
-#root {
-    display: flex;
+body a {
+    text-decoration: none;
+}
+
+body li {
+    list-style: none;
 }
 

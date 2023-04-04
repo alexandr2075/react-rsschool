@@ -1,10 +1,12 @@
 .search-block {
     height: 30px;
     display: flex;
+
 }
 
 .search {
     display: flex;
+    flex: 0 1 20px;
     height: 100%;
     margin-right: 8px;
     border-radius: 15px;
@@ -14,15 +16,14 @@
 
 .search-btn {
     display: flex;
-    flex: 1 0 20px;
+    flex: 0 0 40px;
     justify-content: flex-end;
     align-items: center;
     width: 50px;
     height: 100%;
     border: transparent;
-    background-color: #447B21FF;
+    background-color: #558105FF;
     border-radius: 35px;
-    /*padding: 13px;*/
 }
 
 .search-btn:hover {

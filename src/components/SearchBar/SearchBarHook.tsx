@@ -39,6 +39,9 @@ function SearchBarHook(props: SearchPropsType) {
       .then((response) => response.json())
       .then((data) => {
         props.setCards(data.results);
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 
