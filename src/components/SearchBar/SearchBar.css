@@ -1,0 +1,36 @@
+.search-block {
+    height: 30px;
+    display: flex;
+
+}
+
+.search {
+    display: flex;
+    flex: 0 1 20px;
+    height: 100%;
+    margin-right: 8px;
+    border-radius: 15px;
+    padding: 0 0 0 10px;
+    border: transparent;
+}
+
+.search-btn {
+    display: flex;
+    flex: 0 0 40px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50px;
+    height: 100%;
+    border: transparent;
+    background-color: #558105FF;
+    border-radius: 35px;
+}
+
+.search-btn:hover {
+    background: #56942DFF;
+}
+
+.search-btn:active {
+    background-color: red;
+}
+
