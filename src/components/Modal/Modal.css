@@ -13,8 +13,8 @@
 .modal {
     display: flex;
     position: absolute;
-    top: calc(50% - 300px);
-    left: calc(50% - 250px);
+    top: calc(15%);
+    left: calc(25%);
     width: 60%;
     height: 70%;
     background-color: #E0EF2FFF;
@@ -44,5 +44,6 @@
 }
 
 .modal_params {
-
+    width: 50%;
+    height: 100%;
 }

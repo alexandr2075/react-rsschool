@@ -1,12 +1,17 @@
 import * as React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import SearchBar from './SearchBar';
+import SearchBarHook from './SearchBarHook';
 
 describe('input', async () => {
   it('shows button search', () => {
-    render(<SearchBar />);
-    const linkElement = screen.getByText('search');
+    render(
+      <SearchBarHook
+        setCards={() => ({ card: 'card' })}
+        setErrorData={() => ({ error: 'error' })}
+      />
+    );
+    const linkElement = screen.getByRole('textbox');
     expect(linkElement).toBeInTheDocument();
   });
 });

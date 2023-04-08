@@ -30,3 +30,7 @@
     background: #56942DFF;
 }
 
+.search-btn:active {
+    background-color: red;
+}
+

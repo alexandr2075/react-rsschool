@@ -4,7 +4,7 @@ import './App.css';
 import ErrorPage from './pages/404';
 import Layout from './components/Layout/Layout';
 import { AboutUs } from './pages/AboutUs';
-import Home from './pages/Home/Home';
+import { Home } from './pages/Home/Home';
 import FormHook from './components/Form/FormHook';
 
 function App() {

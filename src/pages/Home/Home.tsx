@@ -7,6 +7,7 @@ import { Modal } from '../../components/Modal/Modal';
 type OutletContextType = {
   cards: Array<DataCard>;
   isLoading: boolean;
+  error: string;
 };
 
 export type DataCard = {
@@ -35,14 +36,13 @@ const initialDataCard = {
 };
 
 export const Home = () => {
-  const { cards, isLoading } = useOutletContext<OutletContextType>();
+  const { cards, isLoading, error } = useOutletContext<OutletContextType>();
   const [cardModal, setCardModal] = useState<DataCard>(initialDataCard);
   const [isVisibleModalCard, setIsVisibleModalCard] = useState(false);
 
   const modalClick = (event: MouseEvent) => {
     const currentCardId = event.currentTarget.id;
     const currentCard = cards.find((card) => card.id === currentCardId);
-    console.log(cardModal);
     if (currentCard) setCardModal(currentCard);
     setIsVisibleModalCard(true);
   };
@@ -66,9 +66,8 @@ export const Home = () => {
               />
             );
           })}
+      {error && <div className={'home-error'}>{error}</div>}
       {isVisibleModalCard && <Modal card={cardModal} closeModal={closeModal} />}
     </div>
   );
 };
-
-export default Home;

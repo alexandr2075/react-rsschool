@@ -5,6 +5,7 @@ import { FcSearch } from 'react-icons/fc';
 
 type SearchPropsType = {
   setCards: React.Dispatch<React.SetStateAction<DataType[]>>;
+  setErrorData: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function SearchBarHook(props: SearchPropsType) {
@@ -22,6 +23,7 @@ function SearchBarHook(props: SearchPropsType) {
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValueSearch(event.target.value);
+    props.setErrorData('');
   };
 
   const onEnter = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -31,7 +33,7 @@ function SearchBarHook(props: SearchPropsType) {
   };
 
   const onSearch = () => {
-    fetch(`https://api.unsplash.com/search/photos?query=${valueSearch}&per_page=30&page=3`, {
+    fetch(`https://api.unsplash.com/search/photos?query=${valueSearch}&per_page=30&page=2`, {
       headers: {
         Authorization: 'Client-ID T_WBzHCyEvDlZ2IItceILiDVrwuhwTVDEg0Oh3QV6ic',
       },
@@ -39,9 +41,12 @@ function SearchBarHook(props: SearchPropsType) {
       .then((response) => response.json())
       .then((data) => {
         props.setCards(data.results);
+        if (data.results.length === 0) {
+          throw Error('There is no such data. Please make another request.');
+        }
       })
       .catch((error) => {
-        console.log(error.message);
+        props.setErrorData(error.message);
       });
   };
 

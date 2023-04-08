@@ -12,10 +12,10 @@ export type UrlsType = {
 
 export type CardPropsType = {
   id?: string;
-  description: string;
+  description?: string;
   created_at?: string;
   likes?: number;
-  url: string;
+  url?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
 };
 
