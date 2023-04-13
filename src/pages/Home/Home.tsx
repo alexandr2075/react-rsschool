@@ -1,14 +1,11 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { Card, UrlsType } from '../../components/Card/Card';
 import './Home.css';
-import { useOutletContext } from 'react-router-dom';
 import { Modal } from '../../components/Modal/Modal';
-
-type OutletContextType = {
-  cards: Array<DataCard>;
-  isLoading: boolean;
-  error: string;
-};
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setSearchResults } from '../../features/searchResultsSlice';
+import { TbLoader3 } from 'react-icons/tb';
+import { useGetUnsplashQuery } from '../../services/unsplashApi';
 
 export type DataCard = {
   id: string;
@@ -36,9 +33,17 @@ const initialDataCard = {
 };
 
 export const Home = () => {
-  const { cards, isLoading, error } = useOutletContext<OutletContextType>();
+  const { data, isLoading } = useGetUnsplashQuery('photos');
+
+  const cards = useAppSelector((state) => state.search.searchResults);
+  const searchError = useAppSelector((state) => state.search.searchError);
+  const dispatch = useAppDispatch();
   const [cardModal, setCardModal] = useState<DataCard>(initialDataCard);
   const [isVisibleModalCard, setIsVisibleModalCard] = useState(false);
+
+  useEffect(() => {
+    if (data) dispatch(setSearchResults(data));
+  }, [data]);
 
   const modalClick = (event: MouseEvent) => {
     const currentCardId = event.currentTarget.id;
@@ -53,20 +58,22 @@ export const Home = () => {
 
   return (
     <div className="cards">
-      {isLoading
-        ? '..Loading'
-        : cards.map((card) => {
-            return (
-              <Card
-                key={card.id}
-                id={card.id}
-                description={card.alt_description}
-                url={card.urls.small}
-                onClick={modalClick}
-              />
-            );
-          })}
-      {error && <div className={'home-error'}>{error}</div>}
+      {isLoading ? (
+        <TbLoader3 size={100} />
+      ) : (
+        cards.map((card) => {
+          return (
+            <Card
+              key={card.id}
+              id={card.id}
+              description={card.alt_description}
+              url={card.urls.small}
+              onClick={modalClick}
+            />
+          );
+        })
+      )}
+      {searchError && <div className={'home-error'}>{searchError}</div>}
       {isVisibleModalCard && <Modal card={cardModal} closeModal={closeModal} />}
     </div>
   );

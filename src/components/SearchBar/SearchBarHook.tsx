@@ -1,29 +1,20 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 import './SearchBar.css';
-import { DataType } from '../Layout/Layout';
 import { FcSearch } from 'react-icons/fc';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setSearchText } from '../../features/searchTextSlice';
+import { setSearchError, setSearchResults } from '../../features/searchResultsSlice';
+import { useGetSearchUnsplashQuery } from '../../services/unsplashApi';
 
-type SearchPropsType = {
-  setCards: React.Dispatch<React.SetStateAction<DataType[]>>;
-  setErrorData: React.Dispatch<React.SetStateAction<string>>;
-};
+function SearchBarHook() {
+  const valueSearch = useAppSelector((state) => state.searchText.searchText);
+  const dispatch = useAppDispatch();
 
-function SearchBarHook(props: SearchPropsType) {
-  const [valueSearch, setValueSearch] = useState('');
-
-  useEffect(() => {
-    const inputValue = localStorage.getItem('inputValue');
-    if (inputValue) setValueSearch(inputValue);
-    return () => localStorage.setItem('inputValue', valueSearch);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('inputValue', valueSearch);
-  }, [valueSearch]);
+  const { data } = useGetSearchUnsplashQuery(valueSearch);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValueSearch(event.target.value);
-    props.setErrorData('');
+    dispatch(setSearchText(event.target.value));
+    dispatch(setSearchError(''));
   };
 
   const onEnter = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -33,21 +24,7 @@ function SearchBarHook(props: SearchPropsType) {
   };
 
   const onSearch = () => {
-    fetch(`https://api.unsplash.com/search/photos?query=${valueSearch}&per_page=30&page=2`, {
-      headers: {
-        Authorization: 'Client-ID T_WBzHCyEvDlZ2IItceILiDVrwuhwTVDEg0Oh3QV6ic',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        props.setCards(data.results);
-        if (data.results.length === 0) {
-          throw Error('There is no such data. Please make another request.');
-        }
-      })
-      .catch((error) => {
-        props.setErrorData(error.message);
-      });
+    if (data) dispatch(setSearchResults(data.results));
   };
 
   return (

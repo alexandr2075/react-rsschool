@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import FormCard from './FormComponents/FormCard/FormCard';
 import './Form.css';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setFormValues } from '../../features/formValuesSlice';
 
 export type FormValues = {
   name: string;
@@ -12,7 +14,8 @@ export type FormValues = {
 };
 
 export default function FormHook() {
-  const [formValues, setFormValues] = useState<FormValues[]>([]);
+  const formValues = useAppSelector((state) => state.form.formValues);
+  const dispatch = useAppDispatch();
   const [imageUrl, setImageUrl] = useState('');
   const {
     register,
@@ -21,8 +24,7 @@ export default function FormHook() {
     reset,
   } = useForm<FormValues>({});
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    data.avatar = imageUrl;
-    setFormValues([...formValues, data]);
+    dispatch(setFormValues({ ...data, avatar: imageUrl }));
     reset();
   };
 
