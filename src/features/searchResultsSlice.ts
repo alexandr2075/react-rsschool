@@ -6,12 +6,16 @@ interface SearchState {
   searchResults: DataCard[];
   searchError: string;
   isLoadingCards: boolean;
+  currentPage: number;
+  totalPages: number;
 }
 
 const initialState: SearchState = {
   searchResults: [],
   searchError: '',
   isLoadingCards: false,
+  currentPage: 0,
+  totalPages: 0,
 };
 
 export const searchResultsSlice = createSlice({
@@ -24,10 +28,14 @@ export const searchResultsSlice = createSlice({
     setSearchError: (state, action: PayloadAction<string>) => {
       state.searchError = action.payload;
     },
-    setIsloadingCards: (state, action: PayloadAction<boolean>) => {
-      state.isLoadingCards = action.payload;
+    setTotalPages: (state, action: PayloadAction<number>) => {
+      state.totalPages = action.payload;
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
     },
   },
 });
 
-export const { setSearchResults, setSearchError } = searchResultsSlice.actions;
+export const { setSearchResults, setSearchError, setCurrentPage, setTotalPages } =
+  searchResultsSlice.actions;

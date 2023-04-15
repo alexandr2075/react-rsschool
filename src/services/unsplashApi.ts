@@ -9,8 +9,8 @@ export const unsplashApi = createApi({
       query: (name) => `${name}/?client_id=${ACCESS_KEY}&per_page=30`,
     }),
     getSearchUnsplash: builder.query({
-      query: (valueSearch) => ({
-        url: `search/photos?query=${valueSearch}&per_page=30&page=2`,
+      query: ({ valueSearch, page = 0 }) => ({
+        url: `search/photos?query=${valueSearch}&per_page=30&page=${page}`,
         headers: {
           authorization: 'Client-ID T_WBzHCyEvDlZ2IItceILiDVrwuhwTVDEg0Oh3QV6ic',
         },
