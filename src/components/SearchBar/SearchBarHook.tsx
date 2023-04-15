@@ -73,7 +73,6 @@ function SearchBarHook() {
   return (
     <div className="search-block">
       <input
-        type="text"
         className="search"
         value={valueSearch}
         onChange={onChange}

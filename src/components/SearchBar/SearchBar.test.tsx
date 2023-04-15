@@ -5,13 +5,8 @@ import SearchBarHook from './SearchBarHook';
 
 describe('input', async () => {
   it('shows button search', () => {
-    render(
-      <SearchBarHook
-        setCards={() => ({ card: 'card' })}
-        setErrorData={() => ({ error: 'error' })}
-      />
-    );
-    const linkElement = screen.getByRole('textbox');
+    render(<SearchBarHook />);
+    const linkElement = screen.getByRole('searchbox');
     expect(linkElement).toBeInTheDocument();
   });
 });
