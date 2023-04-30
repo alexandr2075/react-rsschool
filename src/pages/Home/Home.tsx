@@ -4,7 +4,7 @@ import './Home.css';
 import { Modal } from '../../components/Modal/Modal';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setCurrentPage, setSearchResults, setTotalPages } from '../../features/searchResultsSlice';
-import { TbLoader3 } from 'react-icons/tb';
+// import { TbLoader3 } from 'react-icons/tb';
 import { useGetUnsplashQuery } from '../../services/unsplashApi';
 
 export type DataCard = {
@@ -88,7 +88,8 @@ export const Home = () => {
       )}
       <div className="cards">
         {isLoading ? (
-          <TbLoader3 size={100} />
+            '...loading'
+          // <TbLoader3 size={100} />
         ) : !searchError ? (
           cards.map((card) => {
             return (

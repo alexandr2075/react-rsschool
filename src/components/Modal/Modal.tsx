@@ -1,7 +1,7 @@
 import React from 'react';
 import './Modal.css';
 import { DataCard } from 'pages/Home/Home';
-import { FcBiohazard } from 'react-icons/fc';
+// import { FcBiohazard } from 'react-icons/fc';
 
 type PropsModalType = {
   card: DataCard;
@@ -17,8 +17,8 @@ export const Modal = (props: PropsModalType) => {
   return (
     <div className="modal-wrapper" onClick={onClickModalWrapper}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <span className="modal-close" onClick={props.closeModal}>
-          <FcBiohazard size={'30px'} />
+        <span className="modal-close" onClick={props.closeModal}>x
+          {/*<FcBiohazard size={'30px'} />*/}
         </span>
         <div className="modal_img">
           <img src={props.card.urls.small} alt="photo" />

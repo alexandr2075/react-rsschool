@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import './SearchBar.css';
-import { FcSearch } from 'react-icons/fc';
+// import { FcSearch } from 'react-icons/fc';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setSearchText } from '../../features/searchTextSlice';
 import {
@@ -79,8 +79,8 @@ function SearchBarHook() {
         onKeyDown={onEnter}
         autoFocus={true}
       />
-      <button className="search-btn" onClick={onSearch}>
-        <FcSearch size="20px" />
+      <button className="search-btn" onClick={onSearch}>search
+        {/*<FcSearch size="20px" />*/}
       </button>
     </div>
   );
