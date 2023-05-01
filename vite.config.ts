@@ -1,19 +1,43 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
+import reactRefresh from '@vitejs/plugin-react-refresh';
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import istanbul from 'vite-plugin-istanbul';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    // coverage: {
-    //   reporter: ['text', 'json', 'html'],
-    // },
+    setupFiles: ['./src/setupTests.ts'],
+    coverage: {
+      reporter: ['text'],
+    },
   },
-  ssr: { noExternal: ['@reduxjs/toolkit']},
+  plugins: [
+    reactRefresh(),
+    istanbul({
+      cypress: true,
+      requireEnv: false,
+    }),
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+  },
+  server: {
+    port: 3001,
+    open: true,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/styles/variables.scss"; 
+        @import "@/styles/mixins.scss";`,
+      },
+    },
+  },
 });
