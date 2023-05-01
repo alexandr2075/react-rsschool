@@ -1,0 +1,23 @@
+.cards-wrapper {
+
+}
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.home-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+}
+
+.pages-buttons {
+    position: sticky;
+    top: 60px;
+    z-index: 2;
+    text-align: center;
+    padding: 10px;
+}
